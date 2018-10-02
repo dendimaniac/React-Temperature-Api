@@ -6,9 +6,10 @@ class Temperature extends Component {
     super(props);
     this.state = {
       city: '',
-      dateAndTime: [],
+      weathers: [{ }]
+      /* dateAndTime: [],
       description: [],
-      temperatureSet: []
+      temperatureSet: [] */
     };
   }
 
@@ -18,7 +19,7 @@ class Temperature extends Component {
       return list.json();
     }).then(data =>
       {
-        let city = data.city.name;
+        /* let city = data.city.name;
 
         let dateAndTime = data.list.map((dateTime) =>
         {
@@ -45,12 +46,23 @@ class Temperature extends Component {
               {Math.round(temp.main.temp - 273.15)}
             </div>
           )
+        }) */
+
+        const city = data.city.name;
+
+        const weathers = data.list.map((item) => {
+          return ({
+            dateAndTime: item.dt_txt,
+            description: item.weather[0].main,
+            temperature: item.main.temp - 273.15
+          })
         })
         this.setState({
           city: city,
-          dateAndTime: dateAndTime,
+          /* dateAndTime: dateAndTime,
           description: description,
-          temperatureSet: temperatureSet
+          temperatureSet: temperatureSet */
+          weathers: weathers
         });
       })
       .catch((error) => {
@@ -58,18 +70,34 @@ class Temperature extends Component {
       });
   }
 
+
   render() {
     return (
       <div className="Temperature">
         <div>
           {this.state.city}
         </div>
-          {this.state.dateAndTime[0]}
+
         <div>
-          {this.state.description[0]}
+          {/* {this.state.dateAndTime[0]} */}
+          {/* {this.state.weathers.map(weather => {
+            return (
+              <div>
+                {weather.dateAndTime}
+              </div>
+            )
+          })} */}
+          {this.state.weathers[0].dateAndTime}
         </div>
+
         <div>
-          {this.state.temperatureSet[0]}
+          {/* {this.state.description[0]} */}
+          {this.state.weathers[0].description}
+        </div>
+
+        <div>
+          {/* {this.state.temperatureSet[0]} */}
+          {Math.round(this.state.weathers[0].temperature)}
         </div>
       </div>
     );
