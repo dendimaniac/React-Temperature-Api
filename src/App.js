@@ -6,7 +6,7 @@ class Temperature extends Component {
     super(props);
     this.state = {
       city: '',
-      weathers: [{ }, { }, { }, { }, { }, { }]
+      weathers: []
       /* dateAndTime: [],
       description: [],
       temperatureSet: [] */
@@ -72,6 +72,9 @@ class Temperature extends Component {
 
 
   render() {
+    if (this.state.weathers[0] == null) {
+      return null;
+    }
     return (
       <div className="Temperature">
         {/* <div>
