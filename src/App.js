@@ -70,39 +70,32 @@ class Temperature extends Component {
       });
   }
 
+  createTable = () => {
+    let table = []
+
+    for (let i = 1; i < 6; i++) {
+      table.push(
+      <div className="column">
+        <div className="row">
+          {this.state.weathers[i].dateAndTime}
+        </div>
+        <div className="row">
+          {this.state.weathers[i].description}
+        </div>
+        <div className="row">
+          {Math.round(this.state.weathers[i].temperature)}
+        </div>
+      </div>)
+    }
+    return table;
+  }
 
   render() {
-    if (this.state.weathers[0] == null) {
+    if (!this.state.weathers.length) {
       return null;
     }
     return (
       <div className="Temperature">
-        {/* <div>
-          {this.state.city}
-        </div>
-
-        <div>
-          {this.state.dateAndTime[0]}
-          {this.state.weathers.map(weather => {
-            return (
-              <div>
-                {weather.dateAndTime}
-              </div>
-            )
-          })}
-          {this.state.weathers[0].dateAndTime}
-        </div>
-
-        <div>
-          {this.state.description[0]}
-          {this.state.weathers[0].description}
-        </div>
-
-        <div>
-          {this.state.temperatureSet[0]}
-          {Math.round(this.state.weathers[0].temperature)}
-        </div> */}
-
         <div className="Temperature-box">
           <p className="Temperature-temp">
             {Math.round(this.state.weathers[0].temperature)}
@@ -117,65 +110,7 @@ class Temperature extends Component {
           </p>
 
           <div className="Temperature-hours">
-            <div className="column">
-              <div className="row">
-                {this.state.weathers[1].dateAndTime}
-              </div>
-              <div className="row">
-                {this.state.weathers[1].description}
-              </div>
-              <div className="row">
-                {Math.round(this.state.weathers[1].temperature)}
-              </div>
-            </div>
-
-            <div className="column">
-              <div className="row">
-                {this.state.weathers[2].dateAndTime}
-              </div>
-              <div className="row">
-                {this.state.weathers[2].description}
-              </div>
-              <div className="row">
-                {Math.round(this.state.weathers[2].temperature)}
-              </div>
-            </div>
-
-            <div className="column">
-              <div className="row">
-                {this.state.weathers[3].dateAndTime}
-              </div>
-              <div className="row">
-                {this.state.weathers[3].description}
-              </div>
-              <div className="row">
-                {Math.round(this.state.weathers[3].temperature)}
-              </div>
-            </div>
-
-            <div className="column">
-              <div className="row">
-                {this.state.weathers[4].dateAndTime}
-              </div>
-              <div className="row">
-                {this.state.weathers[4].description}
-              </div>
-              <div className="row">
-                {Math.round(this.state.weathers[4].temperature)}
-              </div>
-            </div>
-
-            <div className="column">
-              <div className="row">
-                {this.state.weathers[5].dateAndTime}
-              </div>
-              <div className="row">
-                {this.state.weathers[5].description}
-              </div>
-              <div className="row">
-                {Math.round(this.state.weathers[5].temperature)}
-              </div>
-            </div>
+            {this.createTable()}
           </div>
         </div>
       </div>
